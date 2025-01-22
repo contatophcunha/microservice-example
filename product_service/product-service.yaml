@@ -1,32 +1,32 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: user-service
+  name: product-service
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: user-service
+      app: product-service
   template:
     metadata:
       labels:
-        app: user-service
+        app: product-service
     spec:
       containers:
-      - name: user-service
-        image: phcunha/microservice-example:user-service
+      - name: product-service
+        image: phcunha/microservice-example:product-service
         ports:
         - containerPort: 5000
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: user-service
+  name: product-service
 spec:
   type: NodePort
   ports:
   - port: 5000
     targetPort: 5000
-    nodePort: 30001
+    nodePort: 30002
   selector:
-    app: user-service
+    app: product-service
